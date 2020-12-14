@@ -1,26 +1,32 @@
 package com.service.microservice.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-//import javax.validation.constraints.NotBlank;
+import javax.persistence.*;
 
-import java.util.UUID;
-
+@Entity
+@Table(name = "person")
 public class Person {
-    private final UUID id;
-    private final String name;
 
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    // Identifie l'id comme clé unique auto-générée
+    private Integer id;
 
-    public Person(@JsonProperty("id") UUID id,
-                  @JsonProperty("name") String name) {
-        this.id = id;
-        this.name = name;
-    }
+    @Column(nullable = false)
+    private String name;
 
     public String getName() {
         return name;
     }
 
-    public UUID getId() {
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Integer getId() {
         return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 }
